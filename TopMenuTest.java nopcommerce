@@ -1,0 +1,34 @@
+package testsuite;
+
+import browserfactory.BaseTest;
+import org.junit.After;
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.Test;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+public class TopMenuTest extends BaseTest {
+    String baseurl = "https://demo.nopcommerce.com/";
+
+    @Before
+    public void setUp() {
+        openBrowser(baseurl);
+    }
+
+    @Test
+    public void userShouldNavigateToTopMenueTest(){
+        //click on topmenu
+        WebElement topmenufield=driver.findElement(By.xpath("//ul[@class='top-menu notmobile']"));
+        topmenufield.click();
+
+        WebElement computerfield=driver.findElement(By.className("Computers"));
+
+    }
+
+
+    @After
+    public void tearDown() {
+        closeBrowser();
+    }
+
+}

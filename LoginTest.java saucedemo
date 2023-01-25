@@ -1,0 +1,43 @@
+package testsuite;
+
+import browserfactory.BaseTest;
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.After;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+
+public class LoginTest extends BaseTest {
+
+    String baseUrl = "//https://www.saucedemo.com/";
+
+    @Before
+    public void starUp(){
+        openBrowser(baseUrl);  //open browser
+    }
+
+    @Test
+    public void userShouldLoginSuccessfullyWithValidCredentials() {
+        //enter email id in to email field
+        WebElement usernameField = driver.findElement(By.name("user-name"));
+        usernameField.sendKeys("standard_user");
+
+        //enter password into password field
+        WebElement passwordField = driver.findElement(By.name("password"));
+        passwordField.sendKeys("secret_sauce");
+
+        //click on login button
+        WebElement loginButton = driver.findElement(By.xpath("//input[@class='submit-button btn_action']"));
+        loginButton.click();
+
+        //click on product page
+        WebElement productfield = driver.findElement(By.xpath("//div[@class='inventory_list']"));
+        productfield.click();
+
+    }
+
+    @After
+    public void closeBrowser() {
+       driver.quit();
+    }
+}

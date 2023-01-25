@@ -1,0 +1,71 @@
+package Testsuite;
+
+import browserfactory.BaseTest;
+import org.junit.After;
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.Test;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+
+public class LoginTest extends BaseTest {
+
+    String baseUrl = "http://the-internet.herokuapp.com/login";
+
+    @Before
+    public void starUp() {
+        openBrowser(baseUrl);  //open browser
+    }
+
+    @Test
+    public void userShouldLoginSuccessfullyWithValidCredentials() {
+        //enter email id in to email field
+        WebElement usernameField = driver.findElement(By.name("username"));
+        usernameField.sendKeys("tomsmith");
+
+        //enter password into password field
+        WebElement passwordField = driver.findElement(By.name("password"));
+        passwordField.sendKeys("SuperSecretPassword!");
+
+        //click on login button
+        WebElement loginButton = driver.findElement(By.xpath("//button[@type='submit']"));
+        loginButton.click();
+    }
+    @Test
+        public void verifyTheUsernameErrorMessage() {
+        //enter email id in to email field
+        WebElement usernameField1 = driver.findElement(By.name("username"));
+        usernameField1.sendKeys("tomsmith1");
+
+        //enter password into password field
+        WebElement passwordField1 = driver.findElement(By.name("password"));
+        passwordField1.sendKeys("SuperSecretPassword!");
+
+        //click on login button
+        WebElement loginButton1 = driver.findElement(By.xpath("//div[@class='flash error']"));
+        loginButton.click();
+    }
+
+    @Test
+            public void verifyThePasswordErrorMessage() {
+                //enter email id in to email field
+                WebElement usernameField2 = driver.findElement(By.name("username"));
+                usernameField2.sendKeys("tomsmith");
+
+                //enter password into password field
+                WebElement passwordField2 = driver.findElement(By.name("password"));
+                passwordField2.sendKeys("SuperSecretPassword");
+
+                //click on login button
+                WebElement loginButton2 = driver.findElement(By.xpath("//div[@class='flash error']"));
+                loginButton2.click();
+            }
+
+
+            @After
+            public void closeBrowser() {
+                driver.quit();
+            }
+        }
+    }
+}

@@ -1,0 +1,53 @@
+package testsuite;
+
+import browserfactory.BaseTest;
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.After;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+
+public class LoginTest extends BaseTest {
+
+    String baseUrl = "//https://courses.ultimateqa.com/";
+
+    @Before
+    public void starUp() {
+        openBrowser(baseUrl);  //open browser
+    }
+
+    @Test
+    public void userShouldNavigateToLoginPageSuccessfully() {
+        //click on signup
+        WebElement signinfield = driver.findElement(By.xpath("//li[@class='header__nav-item header__sign-in']"));
+       signinfield.click();
+
+
+        //enter email id in to email field
+        WebElement emailIdField = driver.findElement(By.id("user[email]"));
+        emailIdField.sendKeys("riddhipp@gmail.com");
+
+        //enter password into password field
+        WebElement passwordField = driver.findElement(By.name("user[password]"));
+        passwordField.sendKeys("patel12121");
+
+        //click on login button
+        WebElement loginButton = driver.findElement(By.xpath("//button[@type='submit']"));
+        loginButton.click();
+
+        //error message
+        WebElement loginButton1 = driver.findElement(By.xpath("Login was unsuccessful. Please correct the errors and try again.No customer account found"));
+        loginButton1.click();
+
+        WebElement loginLink = driver.findElement(By.className("error message"));
+        String actualText = loginLink.getText();
+        String expectedText = "Error message";
+        Assert.assertEquals(expectedText, actualText);
+    }
+
+        @After
+        public void closeBrowser () {
+            // driver.quit();
+        }
+    }
